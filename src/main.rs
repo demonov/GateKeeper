@@ -2,6 +2,8 @@ use teloxide::prelude::*;
 use teloxide::BotBuilder;
 use teloxide::types::{UpdateKind, ChatId};
 
+mod user_profile;
+
 #[tokio::main]
 async fn main() {
     teloxide::enable_logging!();
@@ -20,7 +22,7 @@ async fn main() {
     //         break;
     //     }
 
-    let mut offset = 0; //todo: pass none for the first time, optimize offset in loop
+    let mut offset = 0; //todo: optimize offset in loop
     'global_update: loop  {
         log::trace!("getting updates using offset {}", offset);
         let updates = bot.get_updates().limit(1).offset(offset).send().await;
@@ -49,8 +51,9 @@ async fn main() {
                         if m.chat.id == 197333640 {
                             match m.text() {
                                 Some("sd") => {
-                                    log::warn!("shutting down");
-                                    break 'global_update;
+                                    log::warn!("shutting down...");
+
+                                    //break 'global_update;
                                 },
                                 _ => {
                                     let _ = bot.send_message(m.chat.id, "Unknown Command").reply_to_message_id(m.id).send().await;
