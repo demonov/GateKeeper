@@ -3,6 +3,7 @@ use teloxide::BotBuilder;
 use teloxide::types::{UpdateKind, ChatId};
 
 mod user_profile;
+mod kv_store;
 
 #[tokio::main]
 async fn main() {

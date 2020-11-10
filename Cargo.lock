@@ -299,6 +299,7 @@ dependencies = [
 name = "gatekeeper"
 version = "0.1.0"
 dependencies = [
+ "async-trait",
  "log",
  "pretty_env_logger",
  "serde",
