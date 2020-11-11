@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 async-trait = "0.1.41"
+anyhow = "1.0"
 
 teloxide = "0.3"
 teloxide-macros = "0.3"

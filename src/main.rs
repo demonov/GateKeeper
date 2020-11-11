@@ -1,9 +1,10 @@
 use teloxide::prelude::*;
 use teloxide::BotBuilder;
-use teloxide::types::{UpdateKind, ChatId};
+use teloxide::types::UpdateKind;
 
 mod user_profile;
 mod kv_store;
+mod file_store;
 
 #[tokio::main]
 async fn main() {
@@ -54,7 +55,7 @@ async fn main() {
                                 Some("sd") => {
                                     log::warn!("shutting down...");
 
-                                    //break 'global_update;
+                                    break 'global_update;
                                 },
                                 _ => {
                                     let _ = bot.send_message(m.chat.id, "Unknown Command").reply_to_message_id(m.id).send().await;
