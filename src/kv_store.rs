@@ -4,6 +4,11 @@ use serde::{de::DeserializeOwned, Serialize};
 
 #[async_trait]
 pub trait KVStore<Key> {
-    async fn load<T: Send + DeserializeOwned>(key: Key) -> Result<T>;
-    async fn save<T: Send + Serialize>(key: Key, data: T) -> Result<()>;
+    async fn load<T>(key: Key) -> Result<T>
+    where
+        T: Send + DeserializeOwned;
+
+    async fn save<T>(key: Key, data: T) -> Result<()>
+    where
+        T: Send + Serialize;
 }

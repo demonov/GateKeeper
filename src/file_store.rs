@@ -1,28 +1,35 @@
 use crate::kv_store::KVStore;
 use anyhow::Result;
 use async_trait::async_trait;
-use serde::Serialize;
 use serde::de::DeserializeOwned;
+use serde::Serialize;
+use std::path::Path;
 
 struct FileStore {
-    pub folder:String,
+    pub folder: String,
 }
 
 impl FileStore {
-    pub fn new(folder: String) -> Self {
+    pub fn new(folder: &str) -> Self {
         Self {
-            folder
+            folder: folder.to_string(),
         }
     }
 }
 
 #[async_trait]
 impl KVStore<String> for FileStore {
-    async fn load<T: Send + DeserializeOwned>(key: String) -> Result<T> {
+    async fn load<T>(key: String) -> Result<T>
+    where
+        T: Send + DeserializeOwned,
+    {
         unimplemented!()
     }
 
-    async fn save<T: Send + Serialize>(key: String, data: T) -> Result<()> {
+    async fn save<T>(key: String, data: T) -> Result<()>
+    where
+        T: Send + Serialize,
+    {
         unimplemented!()
     }
 }
